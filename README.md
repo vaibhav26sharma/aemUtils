@@ -1,10 +1,9 @@
-# Sample AEM project template
+# AEM_JavaUtils
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
-
+This is a project intended to develop and deliver some productive AEM Utilites utilzing the best available Java libraries.
 ## Modules
 
-The main parts of the template are:
+The main parts of the project are:
 
 * core: Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
 * ui.apps: contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, templates, runmode specific configs as well as Hobbes-tests
@@ -47,8 +46,4 @@ There are three levels of testing contained in the project:
     in the browser, open the page in 'Developer mode', open the left panel and switch to the 'Tests' tab and find the generated 'MyName Tests' and run them.
 
 
-## Maven settings
 
-The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
-
-    http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
