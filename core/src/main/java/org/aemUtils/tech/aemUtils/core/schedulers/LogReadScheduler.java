@@ -19,8 +19,7 @@ import org.slf4j.LoggerFactory;
  */
 @Component(metatype = true, label = "A scheduler to read error traces", description = "Thi Scheduler timely hits the LogParser Service & gets the error traces if any in the logs")
 @Service(value = Runnable.class)
-@Properties({ @Property(name = "isActive", boolValue = false, description = "Check to start this scheduler"),
-		@Property(name = "scheduler.expression", value = "*/30 * * * * ?", description = "Cron-job expression"),
+@Properties({ @Property(name = "scheduler.expression", value = "*/5 * * * * ?", description = "Cron-job expression"),
 		@Property(name = "scheduler.concurrent", boolValue = false, description = "Whether or not to schedule this task concurrently") })
 
 public class LogReadScheduler implements Runnable {
@@ -32,6 +31,10 @@ public class LogReadScheduler implements Runnable {
 	public static final String sourceLogDirectory = "sourceLogDirectory";
 	private String source;
 
+	@Property(name = "isActive", boolValue = false, description = "Check to start this scheduler")
+	public static final String isActive = "isActive";
+	private String isactive;
+
 	@Property(label = "destinationLogDirectory.path", description = "Provide the fully qualified path for the destination to store the generated errorOnly.log file")
 	public static final String destinationLogDirectory = "destinationLogDirectory";
 	private String destination;
@@ -40,8 +43,8 @@ public class LogReadScheduler implements Runnable {
 
 	@Override
 	public void run() {
-		LOGGER.debug("LogReadScheduler is now running, source='{}'", source);
-		LOGGER.debug("LogReadScheduler is now running, destination='{}'", destination);
+		LOGGER.debug("****LogReadScheduler Thread is running*************");
+		lParser.parseLogger(source, destination);
 	}
 
 	/*
@@ -52,8 +55,11 @@ public class LogReadScheduler implements Runnable {
 	@Activate
 	protected void activate(final Map<String, Object> config) {
 		readProperties(config);
+		Thread thread = new Thread(new LogReadScheduler());
+		if (isactive == "true") {
+			thread.start();
+		}
 
-		lParser.parseLogger(source, destination);
 	}
 
 	private void readProperties(final Map<String, Object> config) {
@@ -65,6 +71,9 @@ public class LogReadScheduler implements Runnable {
 		destination = PropertiesUtil.toString(config.get(destinationLogDirectory), null);
 		LOGGER.debug("***************configure: destinationLogDirectory='{}''", destination);
 		// LOGGER.debug("configure: myParameter='{}''", myParameter);
+
+		isactive = PropertiesUtil.toString(config.get(isActive), null);
+		LOGGER.debug("***************configure: isActive='{}''", isactive);
 
 	}
 }
