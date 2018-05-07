@@ -465,6 +465,13 @@
             </dependency>            
             <!-- Testing -->
             <dependency>
+    <groupId>com.adobe.aem</groupId>
+    <artifactId>uber-jar</artifactId>
+    <version>6.3.0</version>
+    <classifier>apis</classifier>
+    <scope>provided</scope>
+</dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.8.2</version>
@@ -476,6 +483,7 @@
                 <version>1.5.11</version>
                 <scope>test</scope>
             </dependency>
+            
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
@@ -489,6 +497,7 @@
                 <scope>test</scope>
             </dependency>
         </dependencies>
+        
     </dependencyManagement>
 
 </project>

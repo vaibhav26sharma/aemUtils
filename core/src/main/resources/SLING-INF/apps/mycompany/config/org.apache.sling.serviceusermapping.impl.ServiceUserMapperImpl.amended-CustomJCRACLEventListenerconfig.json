@@ -1,0 +1,8 @@
+{
+  "jcr:primaryType": "sling:OsgiConfig",
+  "name":"org.apache.sling.serviceusermapping.impl.ServiceUserMapperImpl.amended-CustomJCRACLEventListener",
+  "user.mapping":[
+    "org.aemUtils.tech.aemUtils:getResourceResolver=mysysuser"
+  ]
+}
+
